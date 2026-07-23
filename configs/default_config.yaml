@@ -1,0 +1,77 @@
+# Centralized Production & Research Configuration for DocAI-Bench
+# Defines all system parameters for preprocessing, model training, OCR engines, evaluation, and UI.
+
+project:
+  name: "DocAI-Bench"
+  version: "1.0.0"
+  seed: 42
+  device: "cuda" # 'cuda' or 'cpu'
+
+logging:
+  level: "INFO"
+  log_dir: "logs"
+  save_logs: true
+
+preprocessing:
+  target_height: 32
+  target_width: 128
+  grayscale: true
+  deskew:
+    enabled: true
+    max_angle: 45.0
+    hough_threshold: 50
+  binarization:
+    method: "adaptive" # 'adaptive', 'sauvola', 'otsu'
+    block_size: 11
+    c_value: 2
+
+augmentation:
+  enabled: true
+  gaussian_noise_var: [10.0, 50.0]
+  motion_blur_limit: 5
+  perspective_scale: [0.01, 0.05]
+  illumination_gradient: true
+  shadow_probability: 0.3
+
+dataset:
+  train_path: "data/raw/train"
+  val_path: "data/raw/val"
+  test_path: "data/raw/test"
+  vocabulary: "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ "
+  num_workers: 4
+  pin_memory: true
+
+training:
+  batch_size: 32
+  epochs: 25
+  learning_rate: 0.0005
+  weight_decay: 0.0001
+  grad_clip: 5.0
+  use_amp: true # Automatic Mixed Precision
+  scheduler:
+    name: "cosine" # 'cosine', 'step', 'plateau'
+    warmup_epochs: 3
+    min_lr: 0.00001
+  checkpoint:
+    save_dir: "checkpoints"
+    save_top_k: 3
+    monitor_metric: "val_cer"
+    mode: "min"
+
+engines:
+  default_engine: "trocr" # 'easyocr', 'paddleocr', 'trocr', 'crnn'
+  easyocr:
+    languages: ["en"]
+    gpu: true
+  paddleocr:
+    lang: "en"
+    use_angle_cls: true
+    show_log: false
+  trocr:
+    model_name: "microsoft/trocr-base-printed"
+    max_target_length: 128
+
+evaluation:
+  metrics: ["cer", "wer", "levenshtein", "exact_match", "precision", "recall", "f1"]
+  output_dir: "evaluation_results"
+  save_confusion_matrix: true

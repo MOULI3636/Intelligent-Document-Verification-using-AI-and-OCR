@@ -1,0 +1,92 @@
+# Centralized Master Configuration for DocVision AI Platform
+
+project:
+  name: "DocVision AI"
+  version: "1.0.0"
+  environment: "production" # 'development', 'staging', 'production'
+  seed: 42
+  device: "cuda" # 'cuda' or 'cpu'
+
+logging:
+  level: "INFO"
+  log_dir: "logs"
+  log_file: "logs/docvision.log"
+  save_logs: true
+
+preprocessing:
+  target_height: 32
+  target_width: 128
+  grayscale: true
+  deskew:
+    enabled: true
+    max_angle: 45.0
+    hough_threshold: 50
+  binarization:
+    method: "adaptive" # 'adaptive', 'otsu', 'sauvola', 'none'
+    block_size: 11
+    c_value: 2
+
+augmentation:
+  enabled: true
+  gaussian_noise_var: [10.0, 50.0]
+  motion_blur_limit: 5
+  perspective_scale: [0.01, 0.05]
+  illumination_gradient: true
+  shadow_probability: 0.3
+
+dataset:
+  train_path: "data/raw/train"
+  val_path: "data/raw/val"
+  test_path: "data/raw/test"
+  vocabulary: "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ "
+  num_workers: 4
+  pin_memory: true
+
+training:
+  batch_size: 32
+  epochs: 25
+  learning_rate: 0.0005
+  weight_decay: 0.0001
+  grad_clip: 5.0
+  use_amp: true # Automatic Mixed Precision
+  scheduler:
+    name: "cosine" # 'cosine', 'step', 'plateau'
+    warmup_epochs: 3
+    min_lr: 0.00001
+  checkpoint:
+    save_dir: "checkpoints"
+    save_top_k: 3
+    monitor_metric: "val_cer"
+    mode: "min"
+
+engines:
+  default_engine: "easyocr" # 'easyocr', 'paddleocr', 'trocr', 'crnn'
+  easyocr:
+    languages: ["en"]
+    gpu: true
+  paddleocr:
+    lang: "en"
+    use_angle_cls: true
+    show_log: false
+  trocr:
+    model_name: "microsoft/trocr-base-printed"
+    max_target_length: 128
+
+fraud_detection:
+  ela:
+    quality_scale: 90
+    scale_multiplier: 15.0
+    threshold: 40.0
+  copy_move:
+    min_match_count: 8
+    spatial_distance_min: 25.0
+  font_anomaly:
+    spacing_std_threshold: 5.0
+  noise_variance:
+    block_size: 32
+    variance_threshold: 3.0
+
+service:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4

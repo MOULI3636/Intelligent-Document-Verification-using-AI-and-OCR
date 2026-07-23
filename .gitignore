@@ -1,0 +1,64 @@
+# Python Byte-Compiled & Cache Files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / Packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Deep Learning Weights, Checkpoints & Large Data
+checkpoints/*.pt
+checkpoints/*.pth
+checkpoints/*.onnx
+data/raw/*
+data/processed/*
+data/synthetic/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Evaluation Results & Persistent Logs
+logs/
+*.log
+evaluation_results/*
+!evaluation_results/.gitkeep
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment Variables & Credentials
+.env
+.env.local
+.env.*.local
+
+# Pytest & Coverage
+.pytest_cache/
+.coverage
+htmlcov/

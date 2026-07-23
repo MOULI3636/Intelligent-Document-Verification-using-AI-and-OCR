@@ -1,0 +1,341 @@
+{
+    "total_samples": 60,
+    "split_counts": {
+        "train": 42,
+        "val": 6,
+        "test": 12
+    },
+    "statistics": {
+        "total_samples": 60,
+        "category_distribution": {
+            "invoice": 10,
+            "receipt": 10,
+            "passport": 10,
+            "pan_card": 10,
+            "aadhaar_card": 10,
+            "driving_license": 10
+        },
+        "vocabulary_size": 40,
+        "mean_text_length": 22.333333333333332,
+        "max_text_length": 37,
+        "min_text_length": 13,
+        "mean_width": 450.0,
+        "mean_height": 60.0
+    },
+    "supported_document_types": [
+        "invoice",
+        "receipt",
+        "passport",
+        "pan_card",
+        "aadhaar_card",
+        "driving_license"
+    ],
+    "splits": {
+        "train": [
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_008.png",
+                "text": "TOTAL DUE: $1,250.00",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_004.png",
+                "text": "INVOICE #INV-98421",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_003.png",
+                "text": "TAX ID: US9876543",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_009.png",
+                "text": "TAX ID: US9876543",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_006.png",
+                "text": "TAX ID: US9876543",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_007.png",
+                "text": "INVOICE #INV-98421",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_010.png",
+                "text": "INVOICE #INV-98421",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_004.png",
+                "text": "STARBUCKS #1042",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_006.png",
+                "text": "CASH PAYMENT RECEIVED",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_003.png",
+                "text": "CASH PAYMENT RECEIVED",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_005.png",
+                "text": "TOTAL: $14.50",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_002.png",
+                "text": "TOTAL: $14.50",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_009.png",
+                "text": "CASH PAYMENT RECEIVED",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_008.png",
+                "text": "TOTAL: $14.50",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_008.png",
+                "text": "P1234567 IND 9508124 M",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_006.png",
+                "text": "P1234567 IND 9508124 M",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_001.png",
+                "text": "PASSPORT P<IND<KUMAR<<AMIT<<<<<<<",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_003.png",
+                "text": "PASSPORT P<IND<KUMAR<<AMIT<<<<<<<",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_005.png",
+                "text": "PASSPORT P<IND<KUMAR<<AMIT<<<<<<<",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_010.png",
+                "text": "P1234567 IND 9508124 M",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_002.png",
+                "text": "P1234567 IND 9508124 M",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_008.png",
+                "text": "ABCDE1234F - PERMANENT ACCOUNT NUMBER",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_009.png",
+                "text": "INCOME TAX DEPARTMENT",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_004.png",
+                "text": "ABCDE1234F - PERMANENT ACCOUNT NUMBER",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_001.png",
+                "text": "INCOME TAX DEPARTMENT",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_003.png",
+                "text": "INCOME TAX DEPARTMENT",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_010.png",
+                "text": "ABCDE1234F - PERMANENT ACCOUNT NUMBER",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_002.png",
+                "text": "ABCDE1234F - PERMANENT ACCOUNT NUMBER",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_010.png",
+                "text": "9876 5432 1098 - AADHAAR",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_007.png",
+                "text": "GOVERNMENT OF INDIA",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_008.png",
+                "text": "9876 5432 1098 - AADHAAR",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_004.png",
+                "text": "9876 5432 1098 - AADHAAR",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_001.png",
+                "text": "GOVERNMENT OF INDIA",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_003.png",
+                "text": "GOVERNMENT OF INDIA",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_005.png",
+                "text": "GOVERNMENT OF INDIA",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_009.png",
+                "text": "DL-1420110012345",
+                "category": "driving_license"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_001.png",
+                "text": "DL-1420110012345",
+                "category": "driving_license"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_004.png",
+                "text": "DRIVING LICENSE - CLASS LMV",
+                "category": "driving_license"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_003.png",
+                "text": "DL-1420110012345",
+                "category": "driving_license"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_008.png",
+                "text": "DRIVING LICENSE - CLASS LMV",
+                "category": "driving_license"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_006.png",
+                "text": "DRIVING LICENSE - CLASS LMV",
+                "category": "driving_license"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_010.png",
+                "text": "DRIVING LICENSE - CLASS LMV",
+                "category": "driving_license"
+            }
+        ],
+        "val": [
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_005.png",
+                "text": "TOTAL DUE: $1,250.00",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_001.png",
+                "text": "STARBUCKS #1042",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_007.png",
+                "text": "PASSPORT P<IND<KUMAR<<AMIT<<<<<<<",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_005.png",
+                "text": "INCOME TAX DEPARTMENT",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_009.png",
+                "text": "GOVERNMENT OF INDIA",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_005.png",
+                "text": "DL-1420110012345",
+                "category": "driving_license"
+            }
+        ],
+        "test": [
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_001.png",
+                "text": "INVOICE #INV-98421",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\invoice\\invoice_synth_002.png",
+                "text": "TOTAL DUE: $1,250.00",
+                "category": "invoice"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_007.png",
+                "text": "STARBUCKS #1042",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\receipt\\receipt_synth_010.png",
+                "text": "STARBUCKS #1042",
+                "category": "receipt"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_004.png",
+                "text": "P1234567 IND 9508124 M",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\passport\\passport_synth_009.png",
+                "text": "PASSPORT P<IND<KUMAR<<AMIT<<<<<<<",
+                "category": "passport"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_006.png",
+                "text": "ABCDE1234F - PERMANENT ACCOUNT NUMBER",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\pan_card\\pan_card_synth_007.png",
+                "text": "INCOME TAX DEPARTMENT",
+                "category": "pan_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_006.png",
+                "text": "9876 5432 1098 - AADHAAR",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\aadhaar_card\\aadhaar_card_synth_002.png",
+                "text": "9876 5432 1098 - AADHAAR",
+                "category": "aadhaar_card"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_002.png",
+                "text": "DRIVING LICENSE - CLASS LMV",
+                "category": "driving_license"
+            },
+            {
+                "image_path": "data\\synthetic\\driving_license\\driving_license_synth_007.png",
+                "text": "DL-1420110012345",
+                "category": "driving_license"
+            }
+        ]
+    }
+}

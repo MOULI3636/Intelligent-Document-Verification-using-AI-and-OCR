@@ -1,0 +1,25 @@
+# Fraud Detection & Document Verification Configuration
+# Parameters and sensitivity thresholds for Error Level Analysis, Copy-Move, Font Anomalies, and EXIF Integrity.
+
+ela_detection:
+  quality_scale: 90
+  diff_multiplier: 15
+  threshold: 40.0 # Heatmap variance threshold for fraud flag
+
+copy_move_detection:
+  sift_nfeatures: 2000
+  ratio_threshold: 0.75
+  min_match_count: 8
+  spatial_distance_min: 25.0 # Pixels between matched keypoints to prevent self-matches
+
+font_anomaly_detection:
+  stroke_width_tolerance: 0.35
+  baseline_angle_tolerance: 3.0 # Degrees
+  spacing_std_threshold: 4.5
+
+noise_variance_detection:
+  block_size: 16
+  variance_threshold: 2.5
+
+metadata_verification:
+  flagged_software: ["photoshop", "gimp", "canva", "pixlr", "paint.net", "illustrator"]

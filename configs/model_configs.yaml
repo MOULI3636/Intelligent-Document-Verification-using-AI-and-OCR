@@ -1,0 +1,27 @@
+# Model Specific Architecture Configurations
+# Detailed neural network hyperparameter settings for CRNN and HuggingFace fine-tuning.
+
+crnn_architecture:
+  input_channels: 1 # Grayscale document patch
+  target_height: 32
+  target_width: 128
+  
+  resnet_backbone:
+    layers: [2, 2, 2, 2] # ResNet18 backbone setup
+    out_channels: 512
+  
+  rnn_head:
+    hidden_size: 256
+    num_layers: 2
+    bidirectional: true
+    dropout: 0.2
+
+trocr_fine_tuning:
+  model_name: "microsoft/trocr-base-printed"
+  freeze_encoder: false
+  decoder_learning_rate: 0.00005
+  label_smoothing: 0.1
+  generation:
+    max_length: 128
+    num_beams: 4
+    early_stopping: true

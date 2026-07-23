@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: docvision-studio
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 8501
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    autoDeploy: true
+
+  - type: web
+    name: docvision-api
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerCommand: uvicorn src.service.api_router:app --host 0.0.0.0 --port 8000
+    plan: free
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 8000
+    autoDeploy: true

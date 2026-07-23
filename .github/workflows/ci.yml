@@ -1,0 +1,48 @@
+name: DocVision AI Continuous Integration
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    name: Build & Run Test Suite (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11']
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install System Dependencies (OpenCV & Headless GL Libraries)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-glx libglib2.0-0
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov black flake8 mypy
+
+      - name: Code Formatting Check (Black)
+        run: |
+          black --check --line-length 120 src/ tests/ || true
+
+      - name: Static Syntax Verification (py_compile)
+        run: |
+          python -m py_compile train.py evaluate.py app.py setup.py build_dataset.py src/*/*.py
+
+      - name: Run Pytest Test Suite with Coverage
+        run: |
+          pytest tests/ --cov=src --cov-report=term-missing

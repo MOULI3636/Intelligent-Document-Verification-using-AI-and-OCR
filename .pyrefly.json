@@ -1,0 +1,13 @@
+{
+  "project_root": ".",
+  "search_paths": [
+    ".",
+    "src"
+  ],
+  "disabled_rules": [
+    "missing-import"
+  ],
+  "ignore_rules": [
+    "missing-import"
+  ]
+}

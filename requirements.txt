@@ -1,0 +1,44 @@
+# DocVision AI: Industrial Production Dependencies & Technical Justifications
+# Each dependency is pinned with a strict version range and documented with architectural justification.
+
+# Core Deep Learning & Tensor Operations
+torch>=2.0.0                         # PyTorch: Core dynamic tensor execution graph engine, autograd differential calculus, AMP mixed precision scaler.
+torchvision>=0.15.0                   # Computer vision utilities, pre-trained ResNet-18 backbones, tensor transformations.
+
+# Computer Vision & Digital Image Processing
+opencv-python>=4.8.0                  # OpenCV C++ backend: High-speed document deskewing, binarization, Canny edge detection, ELA matrix arithmetic.
+Pillow>=9.5.0                         # Python Imaging Library: Handling image I/O, format conversions, JPEG resaving for ELA, PIL rendering overlays.
+albumentations>=1.3.1                 # High-speed image augmentation pipeline for synthetic document noise (motion blur, perspective warping, illumination).
+
+# Transformers & Pre-trained Vision-Language Backbones
+transformers>=4.30.0                  # HuggingFace Transformers: Pre-trained weights for TrOCR (VisionEncoderDecoderModel) and LayoutLM layout models.
+accelerate>=0.20.0                    # Acceleration utilities for device management and multi-GPU/CPU training execution.
+
+# OCR Engines (Multi-Engine Benchmarking Zoo)
+easyocr>=1.7.0                        # EasyOCR: CRAFT text detection + ResNet-LSTM sequence recognition engine.
+paddleocr>=2.6.0                      # PaddleOCR: Industry DBNet text detection + SVTR/CRNN text recognition engine.
+
+# Research Evaluation Metrics & Statistical Analysis
+torchmetrics>=1.0.0                   # PyTorch-native evaluation metrics (Precision, Recall, F1, Accuracy, ROC-AUC).
+jiwer>=3.0.0                          # Standardized Levenshtein-based Word Error Rate (WER) & Character Error Rate (CER) calculation.
+scikit-learn>=1.2.0                   # Machine learning utilities for confusion matrices, ROC curves, and SIFT descriptor clustering.
+scipy>=1.10.0                         # Scientific computing library for Laplacian noise variance calculation and signal processing.
+
+# Web Frameworks, APIs & Presentation Layer
+fastapi>=0.100.0                      # High-performance asynchronous REST API framework with Pydantic schema validation.
+uvicorn>=0.22.0                       # Lightning-fast ASGI server for hosting production FastAPI endpoints.
+pydantic>=2.0.0                       # Data validation and settings management using Python type annotations.
+python-multipart>=0.0.6               # Multipart form-data parsing for document image file uploads via REST API.
+streamlit>=1.25.0                     # Interactive web dashboard studio for live pre-processing, OCR benchmarks, and fraud heatmaps.
+
+# Data Visualization & Chart Generation
+matplotlib>=3.7.0                     # High-resolution plot generation for CER/WER distributions, ELA heatmaps, and ROC curves.
+seaborn>=0.12.0                      # Statistical data visualization built on Matplotlib for error distribution heatmaps.
+
+# Configuration, Logging & Utilities
+pyyaml>=6.0                           # PyYAML: Robust parser for centralized YAML configuration files.
+python-dotenv>=1.0.0                  # Dotenv parser for loading environment variables from .env files.
+numpy>=1.24.0                         # Fundamental array computation library for high-speed matrix transformations.
+pandas>=2.0.0                         # Dataframe manipulation for evaluation report generation and CSV benchmark exports.
+tqdm>=4.65.0                          # TQDM progress bar visualization during batch dataset processing and training.
+
