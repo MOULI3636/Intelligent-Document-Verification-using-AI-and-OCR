@@ -1,7 +1,7 @@
 <div align="center">
 
-# 🛡️ DocVision AI
-### Intelligent Document Verification, Multi-Engine OCR Benchmarking & Multi-Modal Fraud Detection Platform
+# 🛡️ Intelligent Document Verification using AI & OCR
+### Intelligent Document Analysis, OCR, Information Extraction, and Fraud Detection using Vision AI
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C.svg?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
