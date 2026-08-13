@@ -1,287 +1,744 @@
 <div align="center">
 
-# 🛡️ Intelligent Document Verification using AI & OCR
-### Intelligent Document Analysis, OCR, Information Extraction, and Fraud Detection using Vision AI
+# 🛡️ PII Shield
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C.svg?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![OpenCV](https://img.shields.io/badge/OpenCV-4.8+-5C3EE8.svg?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org/)
-[![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-FFD21E.svg?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Studio-FF4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![CI Build](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF.svg?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+### Enterprise-Style Document Privacy & PII Redaction Platform
 
-<p align="center">
-  <b>Production-grade Industrial AI Research Repository designed for Computer Vision, Document AI, OCR Fine-Tuning, and Digital Forgery Detection.</b>
-</p>
+**Detect → Classify → Replace → Validate → Export**
+
+[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![python-docx](https://img.shields.io/badge/python--docx-DOCX%20Engine-2B579A?style=for-the-badge&logo=microsoftword&logoColor=white)](https://python-docx.readthedocs.io/)
+[![License](https://img.shields.io/badge/License-Educational-lightgrey?style=for-the-badge)](#-license)
+[![Status](https://img.shields.io/badge/Status-Active%20Development-success?style=for-the-badge)](#project-status)
 
 </div>
 
 ---
 
-## 📌 Executive Overview
+PII Shield is a document privacy application designed to identify **Personally Identifiable Information (PII)** inside Microsoft Word (`.docx`) documents, replace detected values with consistent synthetic values, validate the sanitized document, and provide an interactive interface for reviewing the results.
 
-**DocVision AI** is an enterprise-grade AI research and production platform solving three core challenges in modern Document AI:
-1. **Intelligent Document Verification & Layout Analysis**: Automatic 7-class document categorization (Invoices, Receipts, Passports, PAN Cards, Aadhaar Cards, Driving Licenses, Cheques), regex spatial field extraction, and rule verification.
-2. **Multi-Engine OCR Strategy Zoo & Deep Learning Fine-Tuning**: Extensible benchmark suite evaluating **EasyOCR**, **PaddleOCR**, **HuggingFace TrOCR**, and custom **PyTorch CRNN** (ResNet-18 + BiLSTM + CTC) architectures.
-3. **Multi-Modal Document Fraud & Forgery Detection**: Deep learning (ResNet-50 6-class forgery classification) and classical computer vision detectors (Error Level Analysis ELA, SIFT Copy-Move keypoint matching, Font baseline alignment, and Noise variance analysis).
+The project combines a **Python redaction engine** with a **Streamlit web interface** so that document sanitization can be performed without manually editing the source document.
 
 ---
 
-## 🏗️ System Architecture
+## 📑 Table of Contents
 
-```mermaid
-flowchart TD
-    subgraph INGESTION["1. Ingestion & Preprocessing Layer"]
-        A[Raw Document Image / PDF] --> B[Professional Preprocessor]
-        B --> C1[4-Point Perspective Warp]
-        B --> C2[Morphological Shadow Removal]
-        B --> C3[Radon / Hough Deskewing]
-        B --> C4[Quality Assessor Score 0-100]
-    end
+- [Why PII Shield?](#-why-pii-shield)
+- [Key Features](#-key-features)
+- [Interactive Web Application](#️-interactive-web-application)
+- [System Architecture](#-system-architecture)
+- [Project Structure](#-project-structure)
+- [End-to-End Processing Flow](#-end-to-end-processing-flow)
+- [Technology Stack](#️-technology-stack)
+- [Installation](#️-installation)
+- [Running the App](#️-run-the-application)
+- [Testing](#-run-detector-tests)
+- [Example Result](#-example-processing-result)
+- [Privacy & Security Design](#-privacy--security-design)
+- [Limitations](#️-limitations)
+- [What Makes This Different](#-what-makes-this-project-different)
+- [Future Enhancements](#-future-enhancements)
+- [Deployment](#️-deployment)
+- [Project Checklist](#-project-checklist)
+- [Author](#-author)
+- [License](#-license)
 
-    subgraph ENGINE_ZOO["2. Multi-Engine OCR Recognition Zoo"]
-        C1 & C2 & C3 --> D1[EasyOCR Engine]
-        C1 & C2 & C3 --> D2[PaddleOCR Engine]
-        C1 & C2 & C3 --> D3[HuggingFace TrOCR Engine]
-        C1 & C2 & C3 --> D4[PyTorch CRNN Engine]
-    end
+---
 
-    subgraph FRAUD_ENGINE["3. Multi-Modal Fraud Detection Engine"]
-        A --> E1[ResNet-50 Forgery Detector]
-        A --> E2[Error Level Analysis ELA]
-        A --> E3[SIFT Copy-Move Keypoint Matcher]
-        A --> E4[Font Alignment & Pitch Anomaly]
-        A --> E5[High-Pass Noise Variance]
-        A --> E6[EXIF Metadata Integrity Verifier]
-    end
+## ✨ Why PII Shield?
 
-    subgraph VERIFICATION["4. Extraction & Verification Layer"]
-        D1 & D2 & D3 & D4 --> F[Information Extraction Engine]
-        F --> G[Cross-Field Rule Engine]
-    end
+Sensitive information can appear throughout business documents — in paragraphs, tables, headers, and footers. Manually finding and removing these values is slow, inconsistent, and difficult to audit.
 
-    subgraph PRESENTATION["5. Serving & Audit Reporting"]
-        G & E1 & E2 & E3 & E4 & E5 & E6 --> H1[FastAPI Microservice REST Endpoints]
-        G & E1 & E2 & E3 & E4 & E5 & E6 --> H2[Streamlit Interactive Research Studio]
-        G & E1 & E2 & E3 & E4 & E5 & E6 --> H3[Enterprise Automated PDF Audit Reports]
-    end
+**PII Shield automates the workflow:**
+
+```
+DOCX Document
+     │
+     ▼
+Document Structure Analysis
+     │
+     ▼
+PII Detection
+     │
+     ├── Person / Name
+     ├── Email
+     ├── Phone
+     ├── Address
+     ├── DOB / Date
+     ├── SSN
+     ├── Credit Card
+     ├── IP Address
+     └── Company
+     │
+     ▼
+Entity Classification
+     │
+     ▼
+Synthetic Replacement
+     │
+     ▼
+Redacted DOCX
+     │
+     ▼
+Post-Redaction Validation
+     │
+     ▼
+Interactive Report + Downloads
 ```
 
 ---
 
-## 🌟 Key Features
+## 🚀 Key Features
 
-### 🔍 1. Professional Computer Vision Preprocessor (`src/preprocessing/`)
-- **4-Point Perspective Warp**: Detects quadrilateral document boundaries (`cv2.approxPolyDP`) and flattens distorted document scans (`cv2.warpPerspective`).
-- **Shadow Removal**: Normalizes background illumination via morphological dilation surface division.
-- **Unified Quality Score (0-100)**: Evaluates Laplacian blur variance, luminosity status (Underexposed / Optimal / Overexposed), and contrast dynamic range.
+### 📄 DOCX PII Detection
 
-### 🥊 2. Extensible OCR Benchmarking Zoo (`src/metrics/`)
-- OOP strategy pattern (`AbstractOCREngine`) supporting **EasyOCR**, **PaddleOCR**, and **HuggingFace TrOCR**.
-- Calculates **Inference Time (ms)**, **Mean Confidence**, **Word Count**, **Character Count**, and **OCR Quality Score**.
-- Exports structured benchmark results to JSON files (`evaluation_results/ocr_benchmark.json`).
+Upload a Microsoft Word document and analyze its contents for potentially sensitive information. The processing pipeline works across:
 
-### 🕵️ 3. Multi-Modal Document Fraud Engine (`src/fraud_detection/`)
-- **Error Level Analysis (ELA)**: Computes differential JPEG compression heatmaps isolating localized digital edits.
-- **Copy-Move Detector**: SIFT/ORB keypoint matching with spatial distance constraints to spot cloned signatures and numbers.
-- **Font Anomaly Detector**: Analyzes character baseline alignment and pitch variance for spliced text inserts.
-- **ResNet-50 Forgery Model**: 6-class classifier (Original, Edited, Screenshot, Blurred, Photocopy, Tampered) with **GradCAM** activation maps.
+| Location | Supported |
+|---|:---:|
+| Paragraphs | ✅ |
+| Tables | ✅ |
+| Headers | ✅ |
+| Footers | ✅ |
 
-### 📄 4. Structured Entity Extraction (`src/verification/`)
-- Extracts **Invoice Number**, **Vendor Name**, **Date**, **GSTIN**, **Total Amount**, **Address**, and **Customer Name**.
-- Outputs clean, structured JSON payloads with confidence scores.
+This matters because sensitive information isn't necessarily stored only in normal paragraph text.
 
-### 📊 5. Master Evaluation & Experiment Tracking (`src/metrics/`)
-- Computes Accuracy, Precision, Recall, F1 (Macro/Micro), ROC AUC, Latency percentiles (p50, p95, p99), RAM MB, and CUDA GPU VRAM peak allocation.
-- **Weights & Biases (`wandb`)** integration for cloud hyperparameter and artifact tracking.
-- Renders Confusion Matrices, ROC Curves, PR Curves, and Training Loss Curves.
+### 🏷️ Multiple PII Categories
+
+The detector layer supports pattern/context-based detection for the following categories:
+
+| Category | Example |
+|---|---|
+| `PERSON` / Name | John Smith |
+| `EMAIL` | john.smith@example.com |
+| `PHONE` | +91 9876543210 |
+| `DOB` / Date | 15/08/1990 |
+| `SSN` | 123-45-6789 |
+| `CREDIT_CARD` | 4111 1111 1111 1111 |
+| `IP_ADDRESS` | 192.168.1.25 |
+| `ADDRESS` | 123 Example Road, Pune |
+| `COMPANY` | ABC Technologies Limited |
+
+> Detection is built around **deterministic patterns and contextual heuristics** rather than requiring a large external AI model.
+
+### 🔄 Consistent Synthetic Replacement
+
+Detected values aren't simply deleted — PII Shield generates replacement values so the sanitized document stays readable.
+
+**Example:**
+
+```diff
+- Original: John Smith contacted john.smith@example.com.
++ Redacted: Rahul Kapoor contacted rahul.kapoor@example.com.
+```
+
+The replacement approach preserves document usability while removing the original sensitive value.
+
+### ✅ Post-Redaction Validation
+
+A core part of the project is the **second scan**. After creating the redacted document, the system checks the sanitized result again.
+
+```
+Original Document
+     │
+     ▼
+ PII Detection
+     │
+     ▼
+ Replacement
+     │
+     ▼
+Redacted Document
+     │
+     ▼
+Second Detection Scan
+     │
+     ├── 0 remaining  → ✅ PASSED
+     └── Remaining    → ⚠️ REVIEW
+```
+
+This makes the system more than a simple find-and-replace script.
 
 ---
 
-## 🖼️ Application Screenshots & Visualizations
+## 🖥️ Interactive Web Application
 
-<div align="center">
+PII Shield includes a **Streamlit interface** designed as an enterprise-style privacy dashboard.
 
-| Streamlit Studio Dashboard | GradCAM Forgery Activation Heatmap |
-| :---: | :---: |
-| ![Dashboard Placeholder](https://raw.githubusercontent.com/placeholder/docvision-ai/main/docs/dashboard_preview.png) | ![GradCAM Placeholder](https://raw.githubusercontent.com/placeholder/docvision-ai/main/docs/gradcam_preview.png) |
+### 📊 Overview
 
-| Multi-Engine OCR Benchmark | Error Level Analysis (ELA) Heatmap |
-| :---: | :---: |
-| ![OCR Comparison Placeholder](https://raw.githubusercontent.com/placeholder/docvision-ai/main/docs/ocr_benchmark.png) | ![ELA Heatmap Placeholder](https://raw.githubusercontent.com/placeholder/docvision-ai/main/docs/ela_heatmap.png) |
+The main dashboard provides:
 
-</div>
+- DOCX upload
+- File information
+- Processing status
+- PII count & category count
+- Paragraph / table count
+- Processing time
+- Detection breakdown
+- Validation status
+- Redacted document download
+
+### 🔍 Detection Explorer
+
+A detailed view of detected entities:
+
+| Type | Original | Replacement | Start | End |
+|---|---|---|---:|---:|
+| `EMAIL` | original@email.com | synthetic@email.com | 120 | 142 |
+| `PHONE` | +91 XXXXXXXX | +91 XXXXXXXX | 350 | 363 |
+| `COMPANY` | ABC Limited | XYZ Industries | 600 | 613 |
+
+> Results can also be exported as **CSV**.
+
+### ⚖️ Before / After
+
+A direct, transparent comparison:
+
+```
+Original Value
+      ↓
+Synthetic Replacement
+```
+
+### ✅ Validation
+
+Displays:
+
+- Total detected entities
+- Remaining entities
+- Validation status
+- Remaining entity records when manual review is required
+
+### 🗒️ Audit Log
+
+Records key processing events:
+
+- Document uploaded
+- Document structure analyzed
+- PII detection completed
+- Entities processed
+- Synthetic replacements generated
+- Post-redaction validation completed
 
 ---
 
-## 🚀 Installation Guide
+## 🧠 System Architecture
 
-### Prerequisites
-- Python `3.10+`
-- CUDA-compatible GPU (Optional for acceleration)
+```
+                     ┌──────────────────────┐
+                     │     Streamlit UI     │
+                     │       app.py         │
+                     └──────────┬───────────┘
+                                │
+                                ▼
+                     ┌──────────────────────┐
+                     │  Redaction Engine    │
+                     │ redaction_engine.py  │
+                     └──────────┬───────────┘
+                                │
+                 ┌──────────────┴──────────────┐
+                 ▼                             ▼
+         ┌────────────────┐           ┌────────────────┐
+         │ PII Detectors  │           │ DOCX Processor │
+         │  detectors.py  │           │                │
+         └───────┬────────┘           └───────┬────────┘
+                 │                             │
+                 └──────────────┬──────────────┘
+                                ▼
+                     ┌──────────────────────┐
+                     │ Synthetic Replacement│
+                     └──────────┬───────────┘
+                                ▼
+                     ┌──────────────────────┐
+                     │ Validation / Re-scan │
+                     └──────────┬───────────┘
+                                ▼
+                     ┌──────────────────────┐
+                     │ Redacted DOCX + JSON │
+                     └──────────────────────┘
+```
 
-### Step-by-Step Setup
+---
+
+## 📁 Project Structure
+
+```
+PII-Redaction-Tool/
+│
+├── app.py                     # Streamlit UI
+├── main.py                    # CLI entry point
+├── redaction_engine.py        # Core processing engine
+├── detectors.py                # PII detection logic
+├── evaluator.py                # Evaluation / reporting
+├── test_detectors.py           # Detector test suite
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
+├── input/
+│   └── sample.docx
+│
+└── output/
+    ├── redacted_prospectus.docx
+    └── detection_report.json
+```
+
+### 📌 File Responsibilities
+
+<details>
+<summary><b>🎨 <code>app.py</code> — Streamlit presentation layer</b></summary>
+
+Responsible for:
+- Upload interface
+- Navigation
+- Dashboard
+- Detection Explorer
+- Before / After review
+- Validation report
+- Audit log
+- Downloads & visual styling
+
+Calls the redaction engine instead of implementing the core redaction logic itself.
+</details>
+
+<details>
+<summary><b>⌨️ <code>main.py</code> — Command-line execution layer</b></summary>
+
+Useful when the application needs to run without the Streamlit UI.
+
+```
+Input DOCX → main.py → Redaction → Output DOCX → Detection report
+```
+</details>
+
+<details>
+<summary><b>⚙️ <code>redaction_engine.py</code> — Core document-processing layer</b></summary>
+
+Connects:
+- DOCX parsing
+- Detection
+- Entity processing
+- Replacement
+- Validation
+- Output generation
+
+The Streamlit app calls `redact_docx_bytes(...)` to process an uploaded document.
+</details>
+
+<details>
+<summary><b>🔎 <code>detectors.py</code> — Detection layer</b></summary>
+
+Contains the logic/patterns used to identify PII categories:
+- Regular expressions
+- Pattern validation
+- Contextual heuristics
+- Entity classification
+</details>
+
+<details>
+<summary><b>📈 <code>evaluator.py</code> — Evaluation / reporting utility</b></summary>
+
+Used to evaluate detection output and validate generated reports.
+</details>
+
+<details>
+<summary><b>🧪 <code>test_detectors.py</code> — Detector verification script</b></summary>
+
+Checks whether the detector layer identifies representative PII examples such as:
+
+```
+John Smith
+john.smith@example.com
++91 9876543210
+15/08/1990
+123-45-6789
+4111 1111 1111 1111
+192.168.1.25
+123 Example Road, Pune
+ABC Technologies Limited
+```
+</details>
+
+---
+
+## 🔄 End-to-End Processing Flow
+
+| Step | Description |
+|---|---|
+| **1. Upload** | User uploads `document.docx` through the Streamlit interface |
+| **2. Read the document** | The engine reads the DOCX structure — paragraphs, tables, headers, footers |
+| **3. Detect** | Detector patterns (`EMAIL_PATTERN`, `PHONE_PATTERN`, etc.) search for PII |
+| **4. Classify** | Each detected value becomes an entity with `Type`, `Original Value`, `Start`, `End` |
+| **5. Replace** | A synthetic replacement is generated per entity type |
+| **6. Create redacted doc** | Original DOCX → sanitized `PII_Shield_Redacted_<name>.docx` |
+| **7. Validate** | Sanitized content is scanned again → `PASSED` if `remaining_count == 0`, else `REVIEW` |
+| **8. Generate reports** | Redacted DOCX, detection results, validation result, audit info, CSV export |
+
+**Replacement pipeline:**
+
+```
+Original Entity
+      │
+      ▼
+  Entity Type
+      │
+      ▼
+Replacement Generator
+      │
+      ▼
+Synthetic Entity
+```
+
+---
+
+## 🛠️ Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| 🐍 **Python** | Core application language |
+| 🎈 **Streamlit** | Interactive web interface |
+| 🐼 **Pandas** | Result processing & tabular data |
+| 📊 **Altair** | Detection visualization |
+| 📝 **python-docx** | DOCX document processing |
+| 🔤 **Regular Expressions** | Pattern-based PII detection |
+| 🗂️ **JSON** | Detection / report serialization |
+| ✅ **PyTest / Python scripts** | Detector verification |
+
+---
+
+## ⚙️ Installation
+
+### 1️⃣ Clone the repository
+
 ```bash
-# 1. Clone the repository
-git clone https://github.com/docvision-ai/docvision-ai.git
-cd docvision-ai
+git clone https://github.com/YOUR_USERNAME/PII-Redaction-Tool.git
+cd PII-Redaction-Tool
+```
 
-# 2. Create virtual environment
+> Replace `YOUR_USERNAME` with your GitHub username.
+
+### 2️⃣ Create a virtual environment
+
+**Windows**
+
+```powershell
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-# 3. Install core dependencies
+Activate:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+If PowerShell blocks activation:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Then activate again:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+### 3️⃣ Install dependencies
+
+```bash
 pip install -r requirements.txt
-
-# 4. Install docvision-ai package in editable mode
-pip install -e .
 ```
 
 ---
 
-## 💻 Usage Guide
+## ▶️ Run the Application
 
-### 1. Interactive Streamlit Dashboard Studio
-Launch the 8-page interactive web studio:
+Start the Streamlit interface:
+
 ```bash
 streamlit run app.py
 ```
 
-### 2. FastAPI REST Microservice
-Start the production ASGI server:
+Then open the local URL shown by Streamlit, normally:
+
+```
+http://localhost:8501
+```
+
+### 💻 Run Without the UI
+
+For command-line processing:
+
 ```bash
-uvicorn src.service.api_router:app --host 0.0.0.0 --port 8000 --reload
+python main.py
 ```
-- Interactive Swagger API Docs: `http://localhost:8000/docs`
 
-### 3. Python API Integration
-```python
-from src.inference.pipeline import DocumentUnderstandingPipeline
-from src.fraud_detection.ela_detector import ErrorLevelAnalysisDetector
-from src.verification.information_extraction_engine import InformationExtractionEngine
+The CLI workflow generates:
 
-# 1. End-to-End OCR Pipeline
-pipeline = DocumentUnderstandingPipeline(engine_name="easyocr")
-ocr_res = pipeline.run("data/invoice.png", do_preprocess=True)
-
-# 2. Tampering Check
-ela_detector = ErrorLevelAnalysisDetector()
-fraud_res = ela_detector.detect("data/invoice.png")
-
-# 3. Information Extraction
-extractor = InformationExtractionEngine()
-json_output = extractor.extract_to_json(ocr_res["full_text"], document_category="invoice")
-print(json_output)
+```
+output/redacted_prospectus.docx
+output/detection_report.json
 ```
 
 ---
 
-## 🏋️ Model Training Guide
+## 🧪 Run Detector Tests
 
-### 1. PyTorch CRNN Text Recognizer
-Train ResNet-18 + BiLSTM + CTC model:
 ```bash
-python train.py --config config.yaml
+python test_detectors.py
 ```
 
-### 2. EfficientNet-B0 Document Category Classifier
-Train 7-class document classifier with AMP and Early Stopping:
+A successful detector test reports the expected entity categories and a total number of detected test entities.
+
+---
+
+## 📊 Example Processing Result
+
+For a large DOCX document, the application can report statistics such as:
+
+| Metric | Value |
+|---|---:|
+| PII Detected | 343 |
+| PII Types | 5 |
+| Paragraphs | 1006 |
+| Tables | 76 |
+| Processing Time | X.X s |
+
+> The exact values depend on the uploaded document and detector rules.
+
+---
+
+## 🔐 Privacy & Security Design
+
+PII Shield is designed around a simple principle:
+
+> **Do not expose the original sensitive value unnecessarily.**
+
+The application focuses on:
+
+- ✅ Deterministic detection
+- ✅ Synthetic replacement
+- ✅ Local document processing
+- ✅ Post-redaction validation
+- ✅ Auditable processing results
+
+> For production deployment, additional controls should be added before handling real confidential documents.
+
+---
+
+## ⚠️ Limitations
+
+PII detection is **not** equivalent to perfect privacy assurance. Pattern-based systems can produce:
+
+**False positives** — a value may match a pattern but not actually be PII.
+> Example: `123-45-6789` may match an SSN pattern even when used as dummy data.
+
+**False negatives** — PII may be missed when:
+- Formatting is unusual
+- Information is embedded in images
+- Text is represented as shapes
+- The document uses uncommon structures
+- A value does not match an existing detector pattern
+
+> Therefore, **"Validation PASSED"** should be interpreted as *"No remaining PII was detected by the implemented detection rules"* — not a mathematical guarantee that every sensitive value has been removed.
+
+---
+
+## 🌟 What Makes This Project Different?
+
+Instead of being just:
+
+> ~~"Regex that replaces PII"~~
+
+PII Shield is structured as a **complete privacy workflow**:
+
+```
+Detection + Classification + Consistent Synthetic Replacement
+    + Validation + Auditability + Interactive Review + Export
+```
+
+The key differentiator is the **post-redaction validation loop** — the system does not simply assume replacement succeeded. **It checks again.**
+
+---
+
+## 🚀 Future Enhancements
+
+| Feature | Description |
+|---|---|
+| 🎯 **Confidence Scores** | e.g. `EMAIL 99%`, `PHONE 98%`, `ADDRESS 86%`, `PERSON 78%` to prioritize manual review |
+| 🖼️ **OCR-Based PII Detection** | Image → OCR → Extracted Text → PII Detection → Redaction |
+| 📄 **PDF Support** | Extend from DOCX to PDF, TXT, CSV, XLSX |
+| 🧩 **Custom PII Rules** | Org-specific patterns like `EMPLOYEE_ID`, `CUSTOMER_ID`, `POLICY_NUMBER` |
+| 🛡️ **Redaction Policies** | Configurable `Strict` / `Balanced` / `Minimal` policies |
+| 📈 **Analytics Dashboard** | Track documents processed, PII trends, pass rate, avg. processing time |
+| 📤 **Enterprise Audit Export** | Generate JSON / CSV / PDF audit reports for compliance |
+
+---
+
+## ☁️ Deployment
+
+```
+GitHub Repository
+        │
+        ▼
+Cloud Deployment
+        │
+        ▼
+Streamlit Application
+        │
+        ▼
+Public / Restricted URL
+```
+
+Before deploying confidential documents, review:
+
+- [ ] Data retention
+- [ ] Uploaded-file handling
+- [ ] Application logs
+- [ ] Access control
+- [ ] Authentication
+- [ ] Storage configuration
+- [ ] Organization privacy requirements
+
+> ⚠️ **Do not use a public deployment for real confidential documents without appropriate security controls.**
+
+---
+
+## 🧹 .gitignore
+
+```gitignore
+# Virtual environment
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Generated output
+output/*
+!output/.gitkeep
+
+# Local input documents
+input/*
+!input/.gitkeep
+
+# Environment files
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+```
+
+> ⚠️ **Important:** Do not commit real confidential documents to GitHub.
+
+---
+
+## 📦 requirements.txt
+
+```txt
+streamlit
+pandas
+altair
+python-docx
+```
+
+Install with:
+
 ```bash
-python -c "from src.training.classifier_trainer import DocumentClassifierTrainer; print('Ready to train EfficientNet-B0')"
-```
-
-### 3. ResNet-50 Forgery Detection System
-Train 6-class document integrity classifier with GradCAM generation:
-```bash
-python -c "from src.training.forgery_trainer import ForgeryDetectorTrainer; print('Ready to train ResNet-50 Forgery Detector')"
+pip install -r requirements.txt
 ```
 
 ---
 
-## 📊 Research Results & Benchmarks
+## 🔬 Testing Strategy
 
-### OCR Engine Benchmarks (1,000 Document Samples)
-| OCR Engine | Mean Latency (ms) | Mean Confidence | Character Error Rate (CER) ↓ | Word Error Rate (WER) ↓ | OCR Quality Score ↑ |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **EasyOCR** | 42.5 | 0.942 | 0.038 | 0.062 | 92.4 / 100 |
-| **PaddleOCR** | 38.1 | 0.958 | 0.029 | 0.048 | 94.8 / 100 |
-| **HuggingFace TrOCR** | 112.4 | 0.976 | **0.014** | **0.022** | **97.2 / 100** |
-| **Custom CRNN (Ours)** | **28.6** | 0.935 | 0.045 | 0.071 | 90.8 / 100 |
+| Level | Command |
+|---|---|
+| Detector testing | `python test_detectors.py` |
+| CLI processing | `python main.py` |
+| UI testing | `streamlit run app.py` |
 
-### Document Forgery Classification (ResNet-50)
-- **Overall Accuracy**: `98.4%`
-- **Macro F1-Score**: `0.981`
-- **ROC AUC**: `0.994`
+Then verify: DOCX upload → Analyze button → Detection Explorer → Before/After → Validation → Audit Log → Redacted DOCX download → CSV download.
 
 ---
 
-## 📂 Project Directory Structure
+## 📋 Project Checklist
 
-```
-DocVision_AI/
-├── config.yaml                      # Centralized master system configuration
-├── setup.py                         # Package build setup script
-├── pyproject.toml                   # PEP 517 build & tool configuration
-├── requirements.txt                 # Pinned dependencies with justifications
-├── .env.example                     # Environment variable template
-├── .gitignore                      # Git ignore rules
-│
-├── train.py                         # Training script entry point
-├── evaluate.py                      # Benchmarking script entry point
-├── app.py                           # 8-Page Streamlit Studio application
-├── build_dataset.py                 # Dataset pipeline build script
-│
-├── configs/                         # Modular YAML configuration files
-│   ├── model_configs.yaml
-│   ├── fraud_detection_configs.yaml
-│   └── logging_config.yaml
-│
-├── src/                             # Core Python package modules
-│   ├── core/                        # Exceptions hierarchy
-│   ├── utils/                       # Logger, YAML parser, visualization, PDF reporter, GradCAM
-│   ├── preprocessing/               # OpenCV deskewing, binarization, layout parser, augmentations
-│   ├── engines/                     # Abstract base OCR engine & implementations
-│   ├── models/                      # CRNN, TrOCR, EfficientNet-B0, ResNet-50 architectures
-│   ├── fraud_detection/             # ELA, Copy-Move, Font Anomaly, Noise, Metadata verifiers
-│   ├── verification/                # Field extractors & rule verifier
-│   ├── metrics/                     # CER/WER, W&B logger, System monitor, Master evaluator
-│   ├── training/                    # PyTorch trainers with AMP & Early Stopping
-│   ├── inference/                   # Production end-to-end inference pipeline
-│   └── service/                     # FastAPI Pydantic schemas & routers
-│
-├── tests/                           # Pytest test suite (Smoke, Unit, Models, Integration)
-└── .github/workflows/ci.yml         # GitHub Actions CI workflow
-```
+- [x] `app.py` runs
+- [x] `main.py` runs
+- [x] Detector tests pass
+- [x] DOCX upload works
+- [x] PII detection works
+- [x] Synthetic replacement works
+- [x] Redacted DOCX opens correctly
+- [x] Validation page works
+- [x] Detection Explorer shows results
+- [x] Before / After shows replacements
+- [x] Audit Log records processing
+- [x] DOCX download works
+- [x] CSV download works
+- [x] `requirements.txt` is updated
+- [x] `.gitignore` exists
+- [x] No confidential input documents are committed
+- [x] README is included
+- [x] Repository contains only final project files
 
 ---
 
-## 🔮 Future Research Roadmap
+## 🧩 Project Philosophy
 
-1. **Multimodal LLM Layout Parsing**: Integration of LayoutLMv3, Donut, and Qwen-2-VL for Zero-Shot document field extraction.
-2. **Generative Forgery Synthesis**: Synthetic document forgery generation via Diffusion Models (Stable Diffusion / GANs) for data augmentation.
-3. **ONNX / TensorRT Optimization**: Quantization to INT8 for ultra-low latency edge inference.
+```
+Identify → Understand → Transform → Verify → Report
+```
+
+The goal is not merely to hide text. The goal is to create a **repeatable, inspectable, and verifiable document sanitization workflow**.
 
 ---
 
-## 📜 References & Citation
+## 👨‍💻 Author
 
-If you utilize **DocVision AI** in your research or commercial applications, please cite:
+**Mouli Banerjee**
+B.Tech Computer Science & Engineering — Data Science / Data Analytics Focus
 
-```bibtex
-@software{docvision_ai_2026,
-  author = {DocVision AI Research Team},
-  title = {DocVision AI: Intelligent Document Verification, Multi-Engine OCR Benchmarking & Multi-Modal Fraud Detection Platform},
-  year = {2026},
-  publisher = {GitHub},
-  journal = {GitHub Repository},
-  url = {https://github.com/docvision-ai/docvision-ai}
-}
-```
+---
+
+## 📄 License
+
+This project is intended for **educational, portfolio, and demonstration purposes** unless a separate license is provided.
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by AI Research Engineers for Computer Vision & Document AI.</sub>
+
+### ⭐ If you find this project useful
+
+Consider giving the repository a ⭐ on GitHub and sharing feedback or improvements!
+
+---
+
+**Project Status**
+
+| Field | Value |
+|---|---|
+| Current Version | `v1.0` |
+| Status | 🟢 Active Development |
+| Primary Interface | Streamlit |
+| Primary Document Format | Microsoft Word DOCX |
+
+```
+Upload → Detect → Classify → Replace → Validate → Review → Export
+```
+
 </div>
